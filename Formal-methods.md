@@ -1,4 +1,4 @@
-### **Summarized Notes: Formal Methods lecture 2**
+# **Summarized Notes: Formal Methods lecture 2**
 
 # Propositional Logic
 
@@ -472,3 +472,296 @@ Proof systems in FOL extend propositional logic systems to handle quantifiers an
     - Restrict the domain (e.g., using decidable fragments like Description Logic).
     - Combine FOL with probabilistic models (e.g., Bayesian networks) or temporal logics.
     - Use heuristic or approximate reasoning for large-scale systems.
+
+# **lecture 3: Program Semantics and Specification**
+
+**Introduction to Program Semantics and Specification:**
+- **Program semantics**: This is about giving a precise meaning to programs, telling us what each part of the program does.
+- **Program specification**: This describes the desired behavior of a program clearly and unambiguously, allowing us to set expectations for what the program should do.
+  
+These concepts are crucial in **formal methods**, which use mathematical techniques to design, develop, and verify software and hardware. Formal methods help ensure the **reliability** and **correctness** of systems, particularly in safety-critical environments like **aviation**, **medical devices**, and **nuclear plants**.
+
+By applying formal methods, we can eliminate **errors** and **inconsistencies** in the design process and **automate program analysis**.
+
+---
+
+### **Key Roles of Program Semantics and Specification:**
+- **Understand program behavior**: Semantics helps us model how a program behaves.
+  - Example: Understanding how a loop in a program will iterate based on conditions.
+  
+- **Specify behavior**: A program’s specification describes exactly what the program should do, ensuring that it behaves as expected.
+  - Example: Specifying that a function should return a positive integer only.
+  
+- **Verify correctness**: By combining both, we can prove that the program follows its specification.
+  - Example: Verifying that a sorting algorithm actually sorts the list as specified.
+
+- **Reason about program properties**: It helps us understand important characteristics like termination (will it finish running?) or security (is it safe from attacks?).
+  - Example: Verifying that a program terminates and does not run indefinitely.
+
+---
+
+### **Operational Semantics:**
+**Operational semantics** explains how a program executes by describing its **step-by-step execution**. It's like providing a detailed instruction manual for running a program.
+
+- **Small-step semantics**: This method breaks down the program into small steps, detailing how each instruction affects the state of the program at each point in time.
+  - **Example**: In a simple program where a variable `x` is incremented, small-step semantics would show how `x` changes value at each step.
+
+- **Big-step semantics**: This method focuses on the overall result of the program. It describes the end result after executing all instructions.
+  - **Example**: If a program adds two numbers, big-step semantics would just tell you the final result without showing the individual steps.
+
+---
+
+### **Abstract Machines:**
+An **abstract machine** is a hypothetical computer that helps define operational semantics. It shows how a program is executed by explaining how its instructions are carried out and how the program's state is updated.
+
+- **SECD machine**: A classic example of an abstract machine developed to interpret the **lambda calculus**. It uses four components:
+  1. **S (Stack)**: Stores partial results of calculations.
+  2. **E (Environment)**: Stores variable bindings (i.e., the values of variables).
+  3. **C (Control)**: Stores instructions to be executed.
+  4. **D (Dump)**: Stores machine states for function calls.
+  
+  This machine helps explain how the state of a program changes when instructions are executed, providing a clear picture of program behavior.
+
+- **Example**: Consider an abstract machine for a simple language with basic arithmetic operations like addition and subtraction. Here are some simple instructions:
+  - **PUSH**: Pushes a number onto the stack.
+  - **ADD**: Pops two numbers from the stack, adds them, and pushes the result back.
+  - **SUB**: Pops two numbers from the stack, subtracts the second from the first, and pushes the result.
+  - **PRINT**: Prints the value at the top of the stack.
+
+---
+
+### **Example in the Abstract Machine:**
+Let’s consider a simple example using the abstract machine that supports basic arithmetic:
+
+1. **PUSH 3**: Pushes the number `3` onto the stack.
+2. **PUSH 5**: Pushes the number `5` onto the stack.
+3. **ADD**: Pops `3` and `5` from the stack, adds them, and pushes the result `8` back onto the stack.
+4. **PRINT**: Prints the value at the top of the stack, which is `8`.
+
+The abstract machine keeps track of the state of the program at each step, helping to describe how the program’s state evolves as it runs.
+
+---
+
+**Summary**:
+- **Program Semantics** helps us understand how a program behaves by giving precise meanings to its instructions.
+- **Program Specification** defines what the program is supposed to do in a clear way, which is essential for verifying correctness.
+- **Operational Semantics** is the technique used to describe a program’s behavior, either step-by-step (small-step) or overall result (big-step).
+- **Abstract Machines** provide a hypothetical framework to explain how programs execute and how their states change.
+
+This knowledge is crucial for designing reliable and error-free systems, especially in safety-critical applications.
+
+### **Summary of Operational Semantics and Formal Methods**
+
+**1. Introduction to Operational Semantics:**
+Operational semantics defines the meaning of a program by explaining how it executes on an **abstract machine**. This method focuses on how the program's state changes step by step as instructions are executed.
+
+#### Key Constructs in a Simple Language:
+- **Arithmetic expressions**: Numerals (e.g., `5`), variables (e.g., `x`), addition (`e1 + e2`), and subtraction (`e1 - e2`).
+- **Boolean expressions**: Constants `true` and `false`, equality (`e1 = e2`), less than (`e1 < e2`), and conjunction (`b1 and b2`).
+- **Commands**: `skip` (does nothing), sequencing (`c1 ; c2`), assignment (`x := e`), conditional (`if b then c1 else c2`), and loop (`while b do c`).
+
+These constructs are defined by inference rules, specifying how each construct is executed and how the state changes as a result.
+
+---
+
+**2. Examples of Operational Semantics Rules:**
+
+- **Assignment**: 
+  - **Rule**: `<x := e, σ> → σ[x v]` where `<e, σ> → v`
+  - **Explanation**: To execute `x := e`, first evaluate `e` to obtain `v` in state `σ`, and then update the state by assigning `x` to `v`.
+  - **Example**: If `x := 5` and `σ = {x: 3}`, then after execution, `σ = {x: 5}`.
+
+- **Conditional**:
+  - **Rule**: `<if true then c1 else c2, σ> → <c1, σ>`  
+    `<if false then c1 else c2, σ> → <c2, σ>`
+  - **Explanation**: If the condition is `true`, execute `c1`, otherwise execute `c2`.
+  - **Example**: If `b = true`, then `<if true then x := 5 else y := 10, σ> → <x := 5, σ>`. Otherwise, execute the `else` part.
+
+- **Loop**:
+  - **Rule**: `<while b do c, σ> → <if b then (c ; while b do c) else skip, σ>`
+  - **Explanation**: To execute a loop, if `b` is true, execute `c` and repeat the loop. If `b` is false, exit the loop by executing `skip`.
+  - **Example**: If `b = true`, keep executing `c` in the loop; if `b = false`, exit the loop.
+
+---
+
+**3. Operational Semantics for Expressions:**
+
+- **Arithmetic Expressions**:
+  - **Numerals**: `<n, σ> → n`  
+    Example: `<3, σ> → 3`.
+  - **Variables**: `<x, σ> → σ(x)`  
+    Example: If `σ = {x: 4}`, then `<x, σ> → 4`.
+  - **Addition**: `<e1 + e2, σ> → n1 + n2` where `<e1, σ> → n1` and `<e2, σ> → n2`  
+    Example: If `<3, σ> → 3` and `<2, σ> → 2`, then `<3 + 2, σ> → 5`.
+  - **Subtraction**: `<e1 - e2, σ> → n1 - n2` where `<e1, σ> → n1` and `<e2, σ> → n2`  
+    Example: If `<5, σ> → 5` and `<2, σ> → 2`, then `<5 - 2, σ> → 3`.
+
+- **Boolean Expressions**:
+  - **True/False**: `<true, σ> → true`, `<false, σ> → false`
+  - **Equality**:  
+    `<e1 = e2, σ> → true` if `<e1, σ> → v1` and `<e2, σ> → v2` and `v1 = v2`  
+    `<e1 = e2, σ> → false` if `<e1, σ> → v1` and `<e2, σ> → v2` and `v1 ≠ v2`
+    - Example: If `<3, σ> → 3` and `<3, σ> → 3`, then `<3 = 3, σ> → true`. If `<3, σ> → 3` and `<4, σ> → 4`, then `<3 = 4, σ> → false`.
+
+---
+
+**4. Denotational Semantics:**
+Denotational semantics describes the meaning of a program by mapping it to a mathematical object like a function or a set. It focuses on the overall effect of the program, rather than step-by-step execution.
+
+- **Examples of Denotational Mappings**:
+  - **Arithmetic Expressions**:
+    - `n = n`
+    - `x σ = σ(x)`
+    - `e1 + e2 σ = e1 σ + e2 σ`
+  - **Boolean Expressions**:
+    - `true σ = true`
+    - `false σ = false`
+    - `e1 = e2 σ = true` if `e1 σ = e2 σ`
+    - `e1 = e2 σ = false` if `e1 σ ≠ e2 σ`
+
+---
+
+**5. Axiomatic Semantics:**
+Axiomatic semantics defines the meaning of a program by specifying its effect on assertions about the program state, using logical formulas. **Hoare Logic** is a well-known example.
+
+- **Assignment**:  
+  `{P[e/x]} x := e {P}`  
+  This rule states that if the assertion `P[e/x]` holds before the assignment, then `P` holds after the assignment.
+  - Example: If `P` is the assertion `x > 0` and `e = 5`, after `x := 5`, we can say `x > 0`.
+
+- **Conditional**:  
+  `{P and b} c1 {Q} {P and not b} c2 {Q}`  
+  This rule means that if `P and b` holds before executing `c1`, and `P and not b` holds before executing `c2`, then the assertion `P` holds after either branch.
+  - Example: If `x > 0`, then depending on the value of `b`, execute either `c1` or `c2`.
+
+- **Loop**:  
+  `{P and b} c {P}`  
+  This rule ensures that if the assertion `P` holds before executing `c`, it holds again after each iteration of the loop, and `P and not b` holds when the loop ends.
+  - Example: If `P` is `x < 10` and `b` is `x < 10`, the loop will keep iterating until `x` becomes 10 or greater.
+
+---
+
+#### Example of Full Program: Let’s combine these rules in an example program:
+
+Let’s combine these rules in an example program:
+
+```plaintext
+x := 5;
+y := 10;
+if x < y then x := x + 1 else y := y + 1;
+while x < y do x := x + 1;
+```
+
+**Step-by-step Evaluation**:
+1. `<x := 5, σ> → σ[x 5]` → `{x: 5, y: 10}`
+2. `<y := 10, σ> → σ[y 10]` → `{x: 5, y: 10}`
+3. `<if x < y then x := x + 1 else y := y + 1, σ>` → Evaluate `x < y` → true, so we execute `x := x + 1`.
+   - `<x := x + 1, σ> → σ[x 6]` → `{x: 6, y: 10}`
+4. `<while x < y do x := x + 1, σ>` → Since `x < y` (6 < 10), execute `x := x + 1`:
+   - `<x := x + 1, σ> → σ[x 7]` → `{x: 7, y: 10}`
+5. Repeat the loop, `x` becomes 8, 9, and finally 10.
+6. Once `x = 10`, `x < y` is false, so the loop exits.
+
+**Final State**: `{x: 10, y: 10}`.
+
+### **Conclusion**:
+- **Operational semantics** defines how a program is executed step by step.
+- **Denotational semantics** maps the program to a mathematical object to describe its overall effect.
+- **Axiomatic semantics** focuses on logical assertions about the state before and after commands are executed.
+
+These semantics provide different ways to understand and reason about the behavior of programs, helping ensure correctness and reliability in software and hardware systems.
+
+### **Summary of Relationships Between Semantic Approaches and Program Specification Techniques**
+
+---
+
+### **1. Relationships Between Semantic Approaches:**
+
+- **Operational Semantics vs. Denotational Semantics**:
+  - **Complementary Approaches**: Operational semantics provides a **concrete and intuitive** understanding of how a program executes, focusing on **step-by-step** execution and changes in state. Denotational semantics, on the other hand, offers a **more abstract, mathematical** approach, focusing on the overall effect of the program.
+    - **Example**: 
+      - In operational semantics, we might focus on the sequence of steps to compute the result of an arithmetic expression like `3 + 4`.
+      - In denotational semantics, we would focus on mapping the entire expression `3 + 4` to its resulting value `7` using a mathematical function.
+
+- **Equivalence of Operational and Denotational Semantics**:
+  - In many cases, the two approaches are **equivalent**, meaning they describe the **same meaning** of a program but in different ways. This proves that different formal techniques can describe the same program behavior.
+  - **Full Abstraction**: A denotational semantics is considered **fully abstract** with respect to operational semantics if two programs are considered equivalent in denotational semantics **if and only if** they are **observationally equivalent** in operational semantics. This ensures that the denotational semantics faithfully represents all observable behaviors of the program.
+    - **Example**: Two programs that produce the same outputs under all possible inputs should be considered equivalent in both semantic approaches.
+
+- **Axiomatic Semantics and Operational Semantics**:
+  - Axiomatic semantics, which defines the meaning of a program through logical assertions about its state before and after execution, can be used to **prove properties** about operational semantics. 
+  - **Example**: Using axiomatic semantics, we could prove that a program terminates or that it satisfies certain **safety** properties (e.g., no division by zero).
+
+---
+
+### **2. Program Specification Techniques:**
+
+**Program specification** techniques describe the desired behavior of a program. These formal methods ensure that the program does what it is intended to do. Common specification techniques include:
+
+- **Pre- and Post-Conditions**: These define the conditions that must hold **before** and **after** a program or method executes.
+  - **Example**: For a sorting function:
+    - **Pre-condition**: The input is an unsorted array of integers.
+    - **Post-condition**: The array is sorted in ascending order.
+
+- **Invariants**: These are conditions that must hold **throughout** the execution of a program or loop.
+  - **Example**: For a loop calculating the factorial of a number, an invariant could be:
+    - `result = factorial(i)` holds at each iteration.
+
+- **State Machines**: A model that describes the different states a program can be in and the transitions between those states.
+  - **Example**: A **traffic light** state machine could have states like `green`, `yellow`, and `red`, with transitions triggered by timers or sensor inputs.
+
+- **Algebraic Specifications**: These describe the behavior of a program using algebraic equations. It’s particularly useful for defining abstract data types (e.g., lists, sets).
+  - **Example**: A **queue** can be specified algebraically with operations like `enqueue(x)` and `dequeue()`.
+
+---
+
+### **3. Deterministic vs. Non-Deterministic Specifications**:
+
+- **Deterministic Specifications**: These are precise and guarantee that any implementation will always produce the same result for the same inputs.
+  - **Example**: A deterministic specification for a sorting algorithm might state that it must sort a list in **ascending order**.
+
+- **Non-Deterministic Specifications**: These allow for some flexibility in the implementation, meaning that different implementations might produce different results, as long as they all satisfy the specification.
+  - **Example**: A non-deterministic specification for a sorting algorithm might state that it should return any **permutation** of the input list, without specifying the exact order of elements.
+
+---
+
+### **4. Examples of Program Specification Techniques for Different Constructs**:
+
+- **Assignment**:
+  - **Pre-condition**: `{x = 5}`
+  - **Post-condition**: `{x = 6}`
+  - This states that before the assignment `x := x + 1`, `x` is 5, and after the assignment, `x` becomes 6.
+
+- **Conditional**:
+  - **Pre-condition**: `{x > 0}`
+  - **Post-condition**: `{y > 0}`
+  - This states that if `x > 0`, the conditional `if x > 5 then y := 10 else y := 20` ensures that `y` is greater than 0.
+
+- **Loop**:
+  - **Pre-condition**: `{i = 0 and sum = 0}`
+  - **Post-condition**: `{sum = 45}`
+  - This specifies that while `i < 10`, the loop adds `i` to `sum`, and after the loop finishes, `sum` will be 45 (for example, summing the first 9 integers).
+
+---
+
+### **5. Lesson Summary**:
+
+- **Program semantics and specification** are critical for designing, developing, and verifying correct and reliable systems.
+- **Formal methods** provide a solid foundation for reasoning about program behavior and ensuring correctness.
+- The lecture explored the **key approaches** to defining program meaning, such as **operational semantics**, **denotational semantics**, and **axiomatic semantics**.
+- **Program specification techniques** like pre/post-conditions, invariants, and state machines help specify program behavior and ensure correctness.
+- Understanding these techniques allows us to **improve software and hardware designs** and ensure they meet their intended requirements.
+
+---
+
+### **Summary Table**: 
+
+| **Approach**          | **Key Characteristics**                                      | **Advantages**                              | **Disadvantages**                                    |
+|-----------------------|---------------------------------------------------------------|---------------------------------------------|------------------------------------------------------|
+| **Operational Semantics** | Defines meaning by describing execution on an abstract machine | Intuitive, easy to understand, good for complex languages | Can be difficult to reason about program properties |
+| **Denotational Semantics** | Defines meaning by mapping programs to mathematical objects  | Abstract, good for reasoning about program properties | Can be difficult to define for complex languages     |
+| **Axiomatic Semantics** | Defines meaning by specifying effects on assertions           | Good for proving program correctness        | Can be difficult to define axioms and inference rules |
+
+---
+
+By understanding and applying **operational**, **denotational**, and **axiomatic semantics**, along with **program specification techniques**, we can ensure our software and hardware meet the intended **correctness**, **safety**, and **reliability** standards.
