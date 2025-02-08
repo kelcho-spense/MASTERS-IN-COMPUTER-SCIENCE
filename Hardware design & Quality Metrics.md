@@ -399,19 +399,14 @@ Network topology refers to the arrangement of devices in a network, defining how
 ![1739016272307](image/Hardwaredesign&QualityMetrics/1739016272307.png)
 
 - **Bus Topology:** All devices are connected to a single cable (bus). If the cable fails, the entire network is disrupted.  
-  - **Illustration:** A simple line connecting multiple devices.
 
 - **Star Topology:** All devices are connected to a central hub or switch. If one device fails, it does not affect the others.  
-  - **Illustration:** A central hub connected to various devices like a star.
 
 - **Ring Topology:** Devices are connected in a closed loop. Data travels around the ring until it reaches the destination.  
-  - **Illustration:** Devices arranged in a circle with data flowing in one direction.
 
 - **Mesh Topology:** Each device is connected to multiple other devices, providing redundancy and fault tolerance.  
-  - **Illustration:** Devices connected in a web-like structure, with multiple connections between them.
 
 - **Tree Topology:** Combines aspects of star and bus topologies. It has a central root node with branches leading to other nodes.  
-  - **Illustration:** A hierarchical structure with devices branching from a central root node.
 
 #### **Network Protocols:**
 
