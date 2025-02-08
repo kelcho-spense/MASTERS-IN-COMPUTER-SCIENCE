@@ -408,7 +408,7 @@ Network topology refers to the arrangement of devices in a network, defining how
 
 - **Tree Topology:** Combines aspects of star and bus topologies. It has a central root node with branches leading to other nodes.  
 
-#### **Network Protocols:**
+### **Network Protocols:**
 
 ![1739015709904](image/Hardwaredesign&QualityMetrics/1739015709904.gif)
 
@@ -426,7 +426,7 @@ Network topology refers to the arrangement of devices in a network, defining how
 - **Wi-Fi:** A wireless communication protocol that uses radio waves to transmit data.  
   - **Example:** Connecting your laptop to the internet over a wireless network.
 
-#### **The OSI Model:**
+### **The OSI Model:**
 
 The OSI model is a conceptual framework that standardizes network communication into seven layers, each with specific functions.
 
