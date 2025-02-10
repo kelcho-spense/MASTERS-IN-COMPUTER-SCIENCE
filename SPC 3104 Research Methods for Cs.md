@@ -1,6 +1,16 @@
 
+# Cross-Lingual Transfer Learning and Multilingual NLP Models
+
+**Problem Statement:** As NLP models are predominantly trained on languages with abundant data (like English), there's a growing challenge to extend these capabilities to low-resource languages. How can we develop systems that effectively transfer learning from high-resource languages (like English) to low-resource languages, considering differences in grammar, vocabulary, and cultural context?
+
+**Potential Research Areas:**
+
+* Improving transfer learning mechanisms between languages (e.g., how a model trained in English can be adapted to other languages).
+* Developing multilingual models that can handle multiple languages simultaneously while avoiding inefficiency and inaccuracies.
+* Focusing on less-resourced languages and creating models that can handle dialects, regional variations, and informal speech.
 
 
+# Research Methods for CS
 
 | Title                                                   | Authors                                                                                                                                                     | Year of Publication | Key Terms & Concepts                                                                                                               | Research Methods                                                                                                                                  | Analysis                                                                                                        | Summary of Research Results                                                                                                                                   | Research Gap                                                                                                                                                      |
 |---------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
