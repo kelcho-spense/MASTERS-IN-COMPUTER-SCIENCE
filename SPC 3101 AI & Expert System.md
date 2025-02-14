@@ -174,6 +174,103 @@ The agent uses a search algorithm to find a sequence of actions that leads to th
   - **Actions**: Add a queen to an empty square.
   - **Goal Test**: 8 queens are on the board, none attacked.
   - **Path Cost**: The path cost is irrelevant, only the final configuration matters.
+ 
+    Here is the full problem description with requirements and a breakdown of **States**, **Actions**, **Goal Test**, and **Path Cost** for both the **Missionaries and Cannibals Problem** and the **Water Jug Problem**:
+
+---
+
+### **Missionaries and Cannibals Problem**
+
+#### **Problem Description:**
+There are three missionaries and three cannibals on one side of a river. They need to cross the river using a boat that can hold at most two people. The challenge is to transport all the missionaries and cannibals to the opposite side without violating the rule that at no point on either side of the river can the cannibals outnumber the missionaries. If the cannibals outnumber the missionaries on either side, the cannibals will eat the missionaries. 
+
+#### **Requirements:**
+- The boat can hold only two people at a time.
+- The goal is to get all the missionaries and cannibals to the opposite bank.
+- The number of cannibals cannot exceed the number of missionaries on either side of the river at any point.
+
+#### **Problem Formulation:**
+
+1. **States**:
+   - A state can be represented as a tuple `(M_left, C_left, M_right, C_right, Boat)`, where:  
+     - `M_left`: The number of missionaries on the left bank.  
+     - `C_left`: The number of cannibals on the left bank.  
+     - `M_right`: The number of missionaries on the right bank.  
+     - `C_right`: The number of cannibals on the right bank.  
+     - `Boat`: Denotes where the boat is (either left or right bank).  
+
+   **Example state**: `(3, 3, 0, 0, 'left')` means all three missionaries and all three cannibals are on the left bank, and the boat is on the left side.
+
+2. **Actions**:
+   - **Send 1 missionary across**: Move 1 missionary from one side to the other.
+   - **Send 1 cannibal across**: Move 1 cannibal from one side to the other.
+   - **Send 2 missionaries across**: Move 2 missionaries from one side to the other.
+   - **Send 2 cannibals across**: Move 2 cannibals from one side to the other.
+   - **Send 1 missionary and 1 cannibal across**: Move 1 missionary and 1 cannibal from one side to the other.
+   - **Bring 1 person back**: Move 1 person (either a missionary or a cannibal) back to the starting bank.
+
+3. **Goal Test**:  
+   - The goal is to have all the missionaries and cannibals on the right bank with the boat on the right side: `(0, 0, 3, 3, 'right')`.
+
+4. **Path Cost**:  
+   - The path cost can be the number of actions (steps) taken to reach the goal. Each action can have a uniform cost (e.g., cost = 1 per action).
+
+---
+
+### **Water Jug Problem**
+
+#### **Problem Description:**
+You are given two empty water jugs:
+- One jug holds 4 gallons of water.
+- The other jug holds 3 gallons of water.
+
+The task is to fill the 4-gallon jug with exactly 2 gallons of water using the jugs and performing the appropriate actions.
+
+#### **Requirements:**
+- You can fill either jug from a water source or pour water from one jug to the other.
+- The goal is to get exactly 2 gallons of water in the 4-gallon jug.
+- You are only allowed to work with the two jugs (4-gallon and 3-gallon), and their capacities are fixed.
+
+#### **Problem Formulation:**
+
+1. **States**:
+   - A state can be represented as a tuple `(jug_4, jug_3)`, where:
+     - `jug_4`: The amount of water in the 4-gallon jug (ranging from 0 to 4 gallons).  
+     - `jug_3`: The amount of water in the 3-gallon jug (ranging from 0 to 3 gallons).  
+
+   **Example state**: `(4, 0)` means the 4-gallon jug is full (4 gallons), and the 3-gallon jug is empty.
+
+2. **Actions**:
+   - **Fill 4-gallon jug**: Fill the 4-gallon jug to its capacity.
+   - **Fill 3-gallon jug**: Fill the 3-gallon jug to its capacity.
+   - **Pour from 4-gallon jug to 3-gallon jug**: Pour water from the 4-gallon jug into the 3-gallon jug until the 3-gallon jug is full or the 4-gallon jug is empty.
+   - **Pour from 3-gallon jug to 4-gallon jug**: Pour water from the 3-gallon jug into the 4-gallon jug until the 4-gallon jug is full or the 3-gallon jug is empty.
+   - **Empty the 4-gallon jug**: Empty all the water in the 4-gallon jug.
+   - **Empty the 3-gallon jug**: Empty all the water in the 3-gallon jug.
+
+3. **Goal Test**:  
+   - The goal is to have exactly **2 gallons** of water in the 4-gallon jug. Therefore, the goal state is `(2, x)` where `x` can be any amount of water in the 3-gallon jug (0 ≤ x ≤ 3).
+
+4. **Path Cost**:  
+   - The path cost can be the number of actions (steps) taken to reach the goal. Each action can have a uniform cost (e.g., cost = 1 per action).
+
+---
+
+### Summary of Problem Formulation for Both Problems:
+
+#### **Missionaries and Cannibals**:
+- **States**: A tuple of missionaries and cannibals on both banks and the position of the boat.
+- **Actions**: Sending missionaries and cannibals across the river.
+- **Goal Test**: All missionaries and cannibals are on the right bank.
+- **Path Cost**: Number of actions taken to reach the goal.
+
+#### **Water Jug**:
+- **States**: Amount of water in both the 4-gallon and 3-gallon jugs.
+- **Actions**: Fill and pour between the jugs.
+- **Goal Test**: Exactly 2 gallons of water in the 4-gallon jug.
+- **Path Cost**: Number of actions taken to achieve the goal.
+
+These formulations help define the problem-solving process, guiding an AI agent in finding a solution using algorithms such as search or planning.
 
 #### **2. Real-World Problems**:
 - **Route-Finding Problem**: Find the shortest route between two locations, such as in the Romania problem.
