@@ -620,48 +620,271 @@ Following  are some applications of graphs in data structures:
 * Web pages are referred to as vertices on the World Wide Web. Suppose there is a link from page A to page B that can represent an edge. This application is an illustration of a directed graph.
 * Graph transformation systems manipulate graphs in memory using rules. Graph databases store and query graph-structured data in a transaction-safe, permanent manner.
 
-Finally, in this tutorial, you’ll look at the code for the graphs in data structures
+# What Is Spanning Tree
 
-## Code Implementation of Graphs in Data Structures
+Did you know that in a Local Area Network, the spanning tree data structure is applied to manage routing systems? Additionally, it is also used to implement telecommunication networks, transportation networks, and electrical grids as it provides an optimal implementation path. So, in this article, we will discover what a spanning tree in [data structure](https://www.simplilearn.com/tutorials/data-structure-tutorial/what-is-data-structure "data structure") is and understand its functionalities and applications.
 
-| #include <stdio.h>#include<stdlib.h>#include <stdlib.h>#define V 6             // Define the maximum number of vertices in the graphstruct graph                    // declaring graph data structure{struct Node* point[V];     // An array of pointers to Node to represent an adjacency list};struct Node                     // declaring node{int destination;struct Node* next;};struct link                    // declaring edge{int source, destination;};struct graph* make_Graph(struct link edges[], int x)             // function to create graph{int i;struct graph* graph = (struct graph*)malloc(sizeof(struct graph));          // defining graphfor (i = 0; i < V; i++) {graph->point[i] = NULL;}for (i = 0; i < x; i++){int source = edges[i].source;int destination = edges[i].destination;struct Node* Node1 = (struct Node*)malloc(sizeof(struct Node));Node1->destination = destination;Node1->next = graph->point[source];graph->point[source] = Node1;}return graph;}void displayGraph(struct graph* graph)       // function to view garph{int i;for (i = 0; i < V; i++){struct Node* ptr = graph->point[i];while (ptr != NULL){printf("(%d —> %d)\t", i, ptr->destination);ptr = ptr->next;}printf("\n");}}int main(void){struct link edges[] ={{ 0, 1 }, { 1, 3 }, { 3, 0 }, { 3, 4 }, { 4, 5 }, { 5, 6 }};int n = sizeof(edges)/sizeof(edges[0]);struct graph *graph = make_Graph(edges, n);displayGraph(graph);return 0;} |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+## Graphs and Their Different Types
 
-Output
+Spanning tree in data structures and [algorithms](https://www.simplilearn.com/tutorials/data-structure-tutorial/what-is-an-algorithm "algorithms") is developed by referencing the mathematical field of graph theory. Thus, primarily, we shall understand a few terminologies about the graph at a glance.
 
-| (0 ù> 1)(1 ù> 3)(3 ù> 4)        (3 ù> 0)(4 ù> 5)(5 ù> 6)--------------------------------Process exited after 0.06697 seconds with return value 0Press any key to continue . . . |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+A graph is a structure that contains vertices and edges connecting them. Based on their edge connectivity, there are three basic types of graphs as follows:
 
-## FAQs
+* ### Undirected Graph
 
-### 1. Where are graph data structures used in real life?
+The graph in which all the edges don’t point to any specific direction is called an undirected graph. Since there is no particular direction given for traversal, this graph’s edges are considered bidirectional. The representation of the graph shown below is an example of an undirected graph.
 
-You most likely utilise social networking platforms such as Facebook, LinkedIn, Instagram, and others. A wonderful example of a graph in usage is social media. Graphs are used in social media to hold information about each user. Every user is a node in this case, just like in Graph. Similarly, Google Maps is another application that makes use of graphs. In the case of Google Maps, each place is referred to as a node, and the roads that connect them are referred to as edges.
+![Undirected_Graph_Illustration](https://www.simplilearn.com/ice9/free_resources_article_thumb/Undirected_Graph_Illustration.jpg)
 
-### 2. What are the different types of graphs in data structure?
+* ### Directed Graph
 
-A graph is a non-linear data structure composed of nodes and edges. They come in a variety of forms. Namely, they are Finite Graphs, Infinite Graphs, Trivial Graphs, Simple Graphs, Multi Graphs, Null Graphs, Complete Graphs, Pseudo Graphs, Regular Graphs, Labeled Graphs, Digraph Graphs, Subgraphs, Connected or Disconnected Graphs, and Cyclic Graphs.
+The graph in which all the edges point to only one specific direction is called a directed graph. In this type of graph, the retrieval to the last node is not possible since the edges of this graph can only be traversed in one direction.
 
-### 3. How many types of graphs are there in data structure?
+![Directed_graph_illustration.](https://www.simplilearn.com/ice9/free_resources_article_thumb/Directed_graph_illustration.png)
 
-They are of 14 to 15 types. However, the most commonly used graph is the finite graph.
+In the diagram shown above, you can clearly observe that the traversal is possible from direction A -> E.However, you cannot retrieve back at position A from node E due to the directions of edges.
 
-### 4. What is a complete graph in data structure?
+* ### Connected Graph
 
-A graph is considered to be complete if there is an edge between every pair of vertices in the graph. In other words, all of the graph's vertices are connected to the remainder of the graph's vertices. A full graph of 'n' vertices has precisely nC2 edges and is written as Kn.
+A connected graph is a graph in which there is a path from one vertex to any other vertex in a graph. According to this definition, null graphs and singleton graphs can also be called connected graphs. The graph shown below is a connected graph, as you can visit any vertex from any other vertex of a graph.
 
-### 5. What is a directed acyclic graph?
+![Connected_Graph_Illustration.](https://www.simplilearn.com/ice9/free_resources_article_thumb/Connected_Graph_Illustration.png)
 
-A directed acyclic graph (DAG) is a graph that is directed and has no cycles linking the other edges in computer science and mathematics. This indicates that traversing the complete graph from one edge is impossible. The edges of the directed graph can only move in one direction. The graph is a topological sorting in which each node has a specific order.
+## Introduction to Spanning Tree
 
-### 6. What is graph in data structure?
+If you have graph G with vertices V and edges E, then that graph can be represented as G(V, E). For this graph G(V, E), if you construct a tree structure G’(V’, E’) such that the formed tree structure follows constraints mentioned below, then that structure can be called a Spanning Tree.
 
-A graph is a type of non-linear data structure made up of vertices and edges. Vertices are also known as nodes, while edges are lines or arcs that link any two nodes in the network. In more technical terms, a graph comprises vertices (V) and edges (E). The graph is represented as G(E, V).
+1. V’ = V   (number of Vertices in G’ must be equal to the number of vertices in G)
+2. E’ = |V| - 1   (Edges of G’ must be equal to the number of vertices in graph G minus 1)
 
-### 7. What is graph in data structure and its application?
+Let’s understand this by creating spanning trees for a particular graph structure.
 
-A graph is a non-linear data structure made up of vertices (or nodes) linked by edges (or arcs), which can be directed or undirected. Graphs are used in computer science to depict the flow of computation.
+## Creating Spanning Trees for Given Graph
 
-### 8. How are graphs useful when interpreting data?
+Let’s assume that you want to create the spanning tree structures for the graph given below:
 
-Graphs are a popular way to visually depict data connections. A graph's objective is to convey too many or intricate facts to be fully expressed in words and in less space. However, do not use graphs for little quantities of data that may be expressed in a phrase.
+![Graph_G.](https://www.simplilearn.com/ice9/free_resources_article_thumb/Spanning_Tree/Graph_G.png)
+
+As mentioned earlier, the spanning tree has the same number of vertices as the graph. In this case, you have a total number of vertices in the graph equal to 5. Thus, T(V’, E’) will also have 5 vertices in its structure. Additionally,  the number of edges E’ must be equal to the number of vertices in the graph minus one, i.e., 4. For this given graph, five spanning trees can be constructed as shown below:
+
+![Spanning_tree_structures_for_Graph-G](https://www.simplilearn.com/ice9/free_resources_article_thumb/Spanning_Tree/Spanning_tree_structures_for_Graph-G.png)
+
+## How to Calculate the Number of Possible Spanning Trees
+
+A connected graph can have several spanning trees, as previously stated. So, how do you estimate how many distinct spanning trees can be created for a given graph? Graph theory in mathematics provides the answer to this question. According to graph theory, in order to determine the number of feasible spanning trees, you must first determine the graph's type.
+
+If a given graph formulates a closed cycle and has the number of vertices equal to the number of edges, then that graph can be called a cycle graph. And the number of possible spanning trees for any cycle graph is equal to the number of its vertices or edges. The graph for which we created the spanning trees previously had 5 vertices and 5 edges with a closed cycle.
+
+Thus, n(ST)cycle graph =V =E =5
+
+Otherwise, if a unique edge connects each pair of vertices in a graph, it will be considered as a complete graph. And the number of possible spanning trees for this complete graph can be calculated using Cayley’s Formula:
+
+ n(ST)complete graph =V(v-2)
+
+The graph given below is an example of a complete graph consisting of 4 vertices and 6 edges. For this graph, number of possible spanning trees will be:
+
+![Complete_Graph](https://www.simplilearn.com/ice9/free_resources_article_thumb/Spanning_Tree/Complete_Graph.png)
+
+ n(ST)cg =V(v-2)=4(4-2)=42=16
+
+## Properties of Spanning Tree
+
+In parallel and distributed computing, spanning trees are crucial. Listed below are a few important properties of spanning trees.
+
+* A spanning tree whose overall resultant weight value is minimal is considered to be a Minimal Spanning Tree.
+* A connected graph can have more than one spanning tree.
+* All Spanning trees must contain the same number of vertices as of graph, and the number of edges must be equal to |V| - 1.
+* The spanning tree must not contain any cycle.
+* If the given graph is a cycle graph, then the number of possible spanning trees will be equal to the number of vertices of the given graph.
+* If the given graph is a complete graph, then the number of possible spanning trees can be calculated using Cayley’s Formula.
+* A spanning tree cannot be disconnected. If you remove any edge from the created tree, then it won’t be considered as a spanning tree anymore. It can only be regarded as a disconnected graph. The diagram given below explains the same:
+
+![Spanning_Tree_Property.](https://www.simplilearn.com/ice9/free_resources_article_thumb/Spanning_Tree/Spanning_Tree_Property.png)
+
+* There is a chance that there will be more than one minimum spanning tree if there are numerous edges with the same weight.
+
+Consider the example given below. The graph shown here has 4 vertices and 4 edges. And two edges of this graph have the same weight values as the remaining two. Thus, the possible spanning trees for this graph will be more than one with the exact cost.
+
+![Minimum_Spanning_Tree_Property.](https://www.simplilearn.com/ice9/free_resources_article_thumb/Spanning_Tree/Minimum_Spanning_Tree_Property.png)
+
+
+## Applications of Spanning Tree
+
+The following are the applications of the spanning trees:
+
+* Telecommunication Network Building: If we want to develop a telecommunication network for the entire city, a basic naive approach will be more expensive. We can create a communications system at a lower cost by using the Minimum Spanning Tree technique. The image given below explains the difference between Naive and MST routing.
+
+![Naive_vs_MST_Routing-Spanning_trees](https://www.simplilearn.com/ice9/free_resources_article_thumb/Spanning_Tree/Naive_vs_MST_Routing-Spanning_trees.png)
+
+* Constructing Highways or Railroads: For constructing highways or railroads the Minimum Spanning Tree approach is utilized everywhere. Given the possible routes between two cities, MST technique provides you with the optimal route. Basically, the algorithm treats the cities as the vertices and paths joining them as edges to create a subtree that will make the route fully connected and cost efficient.
+
+![Roadway_Construction_Illustration.j](https://www.simplilearn.com/ice9/free_resources_article_thumb/Spanning_Tree/Roadway_Construction_Illustration.jpg.png)
+
+* Image Segmentation: During picture segmentation, a spanning tree is utilized to construct tiles of comparable pixels. The pixels which seem closer to each other and have the same color type are grouped together. This technique is used in every aspect of computer vision in machine learning.
+
+![image_segmentation-Spanning_Tree](https://www.simplilearn.com/ice9/free_resources_article_thumb/Spanning_Tree/Image_segmentation-Spanning_Tree.png)
+
+## Conclusion
+
+In this tutorial, we explored Spanning Tree in a data structure. We discussed various properties of spanning trees and learned how to create these trees for a given graph topology. Later, in this tutorial, we also learned about the applications of spanning trees in order to comprehend its significance.
+
+
+# Minimum Spanning Tree
+
+Did you know that the MST (Minimum Spanning Tree) Protocol in networking is designed using a minimum spanning tree algorithm in [data structure](https://www.simplilearn.com/tutorials/data-structure-tutorial/what-is-data-structure "data structure")? The MSTP provides simple yet fully connected routing paths for any bridged local area network. Additionally, it also makes sure that the network loop never gets created in the system. So, in this article, we will learn about the minimum spanning tree in data structures, as well as its functions and applications.
+
+
+## Introduction to Minimum Spanning Tree
+
+The minimum spanning tree algorithm is developed by referencing the field of graph theory in mathematics. Thus, [to understand this algorithm](https://www.simplilearn.com/data-structures-and-algorithms-article "to understand this algorithm"), we shall first understand what a spanning tree is?
+
+A spanning tree of a connected undirected graph is a subgraph, i.e., a tree structure that binds all vertices with a minimum edge cost sum. If you have graph G with vertices V and edges E, then that graph can be represented as G(V, E). For this graph G(V, E), if you construct a tree structure G’(V’, E’) such that the formed tree structure follows constraints mentioned below, then that structure can be called a Spanning Tree.
+
+1. V’ = V   (number of Vertices in G’ must be equal to the number of vertices in G)
+2. E’ = |V| - 1   (Edges of G’ must be equal to the number of vertices in graph G minus 1)
+
+Let's create spanning trees for a given graph topology to understand this concept better.
+
+![GraphG-Minimum_Spanning_Tree](https://www.simplilearn.com/ice9/free_resources_article_thumb/GraphG-Minimum_Spanning_Tree.png)
+
+For the graph above, possible spanning tree structures are:
+
+![Spanning_tree_structures](https://www.simplilearn.com/ice9/free_resources_article_thumb/Spanning_tree_structures.png)
+
+Now, let’s look at the sum of edge weight costs for all these [spanning trees](https://www.simplilearn.com/tutorials/data-structure-tutorial/spanning-tree-in-data-structure "spanning trees") represented in the table below:
+
+| Spanning Tree | Sum of Edge Costs |
+| ------------- | ----------------- |
+| ST - 1        | 22                |
+| ST - 2        | 35                |
+| ST - 3        | 36                |
+
+Table - 1: Sum of Edge costs
+
+The spanning tree structure 1 has an overall edge weight cost of 22. Which is the least possible substructure cost for given graph G. Thus, ST-1 is considered the minimum spanning tree of graph G. A minimum spanning tree in a weighted graph is one that has the least weight of all the other spanning tree structures.
+
+
+## How to Find the Minimum Spanning Tree?
+
+The naive method we discussed above is not an ideal approach to find out possible MST structures. In that method, we will have to generate all possible spanning trees at first and then calculate the overall sum of edge weights for each generated spanning tree. After that, we will have to determine the minima of all those spanning trees, which will cost us more time and memory.
+
+A better method is to locate a vital attribute of the MST, which will provide clarification if some particular edge should be included in it or not. And then, we can use that property to build up the MST gradually. Let’s find out how we can do that with the help of the greedy programming paradigm. The greedy algorithms that we can use are Prim’s Algorithm and Kruskal’s Algorithm.
+
+First, we shall look into Prim’s algorithm.
+
+### 1. Prim’s Algorithm
+
+[Prim&#39;s algorithm begins with a single node](https://www.simplilearn.com/tutorials/data-structure-tutorial/prims-algorithm "Prim's algorithm begins with a single node") and adds up adjacent nodes one by one by discovering all of the connected edges along the way. Edges with the lowest weights that don't generate cycles are chosen for inclusion in the MST structure. As a result, we can claim that Prim's algorithm finds the globally best answer by making locally optimal decisions.
+
+
+* This algorithm starts with one node.
+* It then, one by one, adds a node that is unconnected to the new graph to the new graph, each time selecting the node whose
+  connecting edge has the smallest weight out of the available nodes’ connecting edges.
+
+Steps involved in Prim’s algorithms are mentioned below:
+
+1. Select any vertex.
+2. Select the shortest edge connected to that vertex.
+3. Select the shortest edge connected to any vertex already
+   connected.
+4. Repeat step 3 until all vertices have been connected.
+
+Every step will have joined one node, so that at the end we will have
+one graph with all the nodes and it will be a minimum spanning tree of
+the original graph.
+
+![1740758778064](image/SPC3102Design&AnalysisofAlgorithms/1740758778064.png)
+
+![1740758808395](image/SPC3102Design&AnalysisofAlgorithms/1740758808395.png)
+
+![1740758833358](image/SPC3102Design&AnalysisofAlgorithms/1740758833358.png)
+
+![1740758865287](image/SPC3102Design&AnalysisofAlgorithms/1740758865287.png)
+
+![1740758890302](image/SPC3102Design&AnalysisofAlgorithms/1740758890302.png)
+
+![1740758910763](image/SPC3102Design&AnalysisofAlgorithms/1740758910763.png)
+
+![1740758935896](image/SPC3102Design&AnalysisofAlgorithms/1740758935896.png)
+
+![1740758955484](image/SPC3102Design&AnalysisofAlgorithms/1740758955484.png)
+
+![1740758975606](image/SPC3102Design&AnalysisofAlgorithms/1740758975606.png)
+
+![1740758996499](image/SPC3102Design&AnalysisofAlgorithms/1740758996499.png)
+
+![1740759017536](image/SPC3102Design&AnalysisofAlgorithms/1740759017536.png)
+
+![1740759041681](image/SPC3102Design&AnalysisofAlgorithms/1740759041681.png)
+
+#### Analysis of Prim's Algorithm
+
+Running Time = O(m + n log n) (m = edges, n = nodes) If a heap is not used, the run time will be O(n^2) instead of O(m + n log n). However, using a heap complicates the code since you’re complicating the data structure. A Fibonacci heap is the best kind
+of heap to use, but again, it complicates the code.
+
+Unlike Kruskal’s, it doesn’t need to see all of the graph at once. It can deal with it one piece at a time. It also doesn’t need to worry if adding an edge will create a cycle since this algorithm deals primarily with the nodes, and not the edges.
+
+For this algorithm the number of nodes needs to be kept to a minimum in addition to the number of edges. For small graphs, the edges matter more, while for large graphs the number of nodes matters more.
+
+### 2. Kruskal’s Algorithm
+
+Kruskal's approach sorts all the edges in ascending order of edge weights and only adds nodes to the tree if the chosen edge does not form a cycle. It also selects the edge with the lowest cost first and the edge with the highest cost last. As a result, we can say that the [Kruskal algorithm](https://www.simplilearn.com/tutorials/data-structure-tutorial/kruskal-algorithm "Kruskal algorithm") makes a locally optimum decision in the hopes of finding the global optimal solution. Hence, this algorithm can also be considered as a [Greedy Algorithm.](https://www.simplilearn.com/tutorials/data-structure-tutorial/greedy-algorithm "Greedy Algorithm.")
+
+This algorithm creates a forest of trees.
+• Initially the forest consists of n single node trees (and no edges).
+• At each step, we add one edge (the cheapest one) so that it joins two trees together repeatedly without forming a cycle
+
+The steps are:
+
+1. Select the shortest edge in a network.
+2. Select the next shortest edge which does not create a circle.
+3. Repeat step 2 until all vertices have been connected.
+
+Every step will have joined two trees in the forest together, so that at
+the end, there will only be one tree in T.
+
+Complete Graph
+
+![1740757340923](image/SPC3102Design&AnalysisofAlgorithms/1740757340923.png)
+
+step 1 extract all edges
+
+![1740757422512](image/SPC3102Design&AnalysisofAlgorithms/1740757422512.png)
+
+step 2 Sort edges
+
+![1740757480222](image/SPC3102Design&AnalysisofAlgorithms/1740757480222.png)
+
+Add edges: In order of weight
+
+![1740757616484](image/SPC3102Design&AnalysisofAlgorithms/1740757616484.png)
+
+![1740757696801](image/SPC3102Design&AnalysisofAlgorithms/1740757696801.png)
+
+![1740757743506](image/SPC3102Design&AnalysisofAlgorithms/1740757743506.png)
+
+![1740757769177](image/SPC3102Design&AnalysisofAlgorithms/1740757769177.png)
+
+![1740757800642](image/SPC3102Design&AnalysisofAlgorithms/1740757800642.png)
+
+Do not add the Cycle
+
+![1740757842223](image/SPC3102Design&AnalysisofAlgorithms/1740757842223.png)
+
+![1740757900195](image/SPC3102Design&AnalysisofAlgorithms/1740757900195.png)
+
+![1740757926184](image/SPC3102Design&AnalysisofAlgorithms/1740757926184.png)
+
+![1740757954956](image/SPC3102Design&AnalysisofAlgorithms/1740757954956.png)
+
+![1740757999634](image/SPC3102Design&AnalysisofAlgorithms/1740757999634.png)
+
+![1740758026546](image/SPC3102Design&AnalysisofAlgorithms/1740758026546.png)
+
+![1740758076390](image/SPC3102Design&AnalysisofAlgorithms/1740758076390.png)
+
+## Analysis of Kruskal'sAlgorithm
+
+Running Time = O(m log n) (m = edges, n = nodes)
+Testing if an edge creates a cycle can be slow unless a complicated data structure called a “union-find” structure is used. It usually only has to check a small fraction of the edges, but in some cases (like if there was a vertex connected to the graph by only one edge and it was the longest edge) it would have to check all the edges.
+This algorithm works best, of course, if the number of edges is kept to a minimum.
