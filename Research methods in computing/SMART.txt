@@ -1,0 +1,98 @@
+Research methods vs Research methodology
+
+Research areas:- Super-alignment of AI models, RAG, AI Agents and Model Context Protocol.
+
+- What are problems existing in Natural language problems
+- Find future work on existing research work to help you with the literature review
+- Read existing work
+
+SMART objectives are a widely used framework for setting clear and actionable goals. The acronym stands for:
+
+Specific: The goal should be clear and unambiguous. It should answer the questions: What exactly do you want to achieve? Why is this goal important? Who is involved? Where will it take place? Which constraints or requirements are there?
+
+Measurable: You should be able to track the progress of your goal and determine when it has been achieved. Ask: How much? How many? How will I measure success?
+
+Achievable: The goal should be realistic and attainable. Consider the resources, knowledge, and skills required to achieve the goal, and ensure that it's within reach given your current situation.
+
+Relevant: The goal should matter to you and align with other relevant goals or larger objectives. Ensure that the goal aligns with broader business goals or personal values.
+
+Time-bound: There should be a clear timeline for achieving the goal. Set a deadline to ensure urgency and prevent procrastination. Ask: By when will this be accomplished?
+
+Specific: Targeting a particular area for improvement
+Measurable: Quantifying, or at least suggesting, an indicator of progress
+Assignable: Defining responsibility clearly
+Realistic: Outlining attainable results with available resources
+Time-related: Including a timeline for expected results
+
+Write 3 objectives on our research
+
+(TAKES CARE OF THE T IN SMART)by the end of these project, the research should do
+1.
+2.
+3.
+
+In Bloom's Taxonomy, higher-level cognitive verbs (related to higher-order thinking skills) are associated with the Analyze, Evaluate, and Create levels. These verbs are used to describe actions or processes that require deeper thinking, critical analysis, or creativity. Here are some high-level cognitive verbs associated with objects (the concepts, data, or materials involved in these cognitive processes):
+
+1. Analyze (Break down information into its components)
+Differentiate: To recognize or identify differences between concepts or ideas.
+
+Distinguish: To identify key differences or characteristics in objects or concepts.
+
+Examine: To look at something carefully in order to understand its parts or structure.
+
+Compare: To identify similarities and differences between two or more items.
+
+Categorize: To group or classify items based on their features or relationships.
+
+Deconstruct: To break down an object or concept into smaller parts in order to understand its structure or function.
+
+Investigate: To inquire or search for information to analyze an object in depth.
+
+Diagram: To represent an object or concept visually, showing its parts or relationships.
+
+2. Evaluate (Make judgments or decisions based on criteria)
+Critique: To review and evaluate the strengths, weaknesses, or merits of an object or idea.
+
+Assess: To judge the value, quality, or importance of an object or concept.
+
+Appraise: To evaluate the worth or quality of something based on evidence or criteria.
+
+Validate: To confirm or support the accuracy, truth, or legitimacy of something.
+
+Judge: To form an opinion or assessment based on criteria or evidence.
+
+Prioritize: To arrange or deal with things in order of importance or urgency based on a set of criteria.
+
+Defend: To justify or support a position or concept with reasoning or evidence.
+
+3. Create (Form new ideas, structures, or products)
+Design: To plan or create something with a specific purpose in mind, such as a structure or product.
+
+Formulate: To create or devise an idea, theory, or strategy.
+
+Develop: To build, elaborate, or evolve an object or idea into something more complex.
+
+Construct: To build or form something by putting together parts or ideas.
+
+Compose: To create a work of art, music, or writing by combining various elements.
+
+Invent: To create something new that has not existed before.
+
+Synthesize: To combine different ideas, elements, or components to form a new whole.
+
+
+• Context of the abstract,
+• Objectives of the research,
+• Method of the research,
+• Sources of data.
+• Potential beneficiaries of the research.
+
+Citation APA style.
+
+
+Write a small abstract on what Your planning to do(200 words).
+
+methods: AGILE
+
+
+write a summary of your work with citations, references, and objectives, with an abstract.
